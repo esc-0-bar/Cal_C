@@ -22,7 +22,8 @@ class CalC extends StatelessWidget {
                       child: Container(
                         child: Text(
                           '30',
-                          style: TextStyle(fontSize: 75.0),
+                          style:
+                              TextStyle(fontSize: 85.0, fontFamily: 'Blinker'),
                         ),
                       ),
                     ),
@@ -134,9 +135,20 @@ class CalC extends StatelessWidget {
                             text: 'x',
                             color: Color(0xFFF27E3F),
                           ),
-                          CalCButton(
-                            text: '=',
-                            color: Color(0xFFF27E3F),
+                          RawMaterialButton(
+                            elevation: 6.0,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                            splashColor: Color(0xFF696969),
+                            constraints: BoxConstraints.tightFor(
+                                width: 70.0, height: 70.0),
+                            fillColor: Color(0xFFF27E3F),
+                            child: Text(
+                              '=',
+                              style:
+                                  TextStyle(fontSize: 40, color: Colors.white),
+                            ),
+                            onPressed: () {},
                           ),
                         ],
                       ),
@@ -167,7 +179,11 @@ class CalCButton extends StatelessWidget {
       //fillColor: Color(0xFF696969),
       child: Text(
         text,
-        style: TextStyle(fontSize: 40, color: color),
+        style: TextStyle(
+          fontSize: 40,
+          color: color,
+          fontFamily: 'Blinker',
+        ),
       ),
       onPressed: () {},
     );
