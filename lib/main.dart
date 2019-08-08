@@ -13,15 +13,23 @@ class _CalCState extends State<CalC> {
   String firstInput = '0';
   String nextInput;
   String answer = '0';
-  bool ansHasValue = false;
+  bool initialHasValue = false;
 
   double add(String x, String y) {
-    return double.parse(x) + double.parse(y);
+    return double.parse(y) + double.parse(x);
   }
 
-  dynamic sub() {}
-  dynamic mul() {}
-  dynamic div() {}
+  double sub(String x, String y) {
+    return double.parse(y) - double.parse(x);
+  }
+
+  double mul(String x, String y) {
+    return double.parse(y) * double.parse(x);
+  }
+
+  double div(String x, String y) {
+    return double.parse(y) / double.parse(x);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +83,7 @@ class _CalCState extends State<CalC> {
                                 initial = '0';
                                 firstInput = '0';
                                 answer = '0';
-                                ansHasValue = false;
+                                initialHasValue = false;
                               });
                             },
                           ),
@@ -90,6 +98,22 @@ class _CalCState extends State<CalC> {
                           CalCButton(
                             text: '/',
                             color: Color(0xFFF27E3F),
+                            onTap: () {
+                              setState(() {
+                                if (firstInput == '0') {
+                                  firstInput = initial;
+                                  initial = '0';
+                                } else {
+                                  nextInput = initial;
+                                  double result = div(firstInput, nextInput);
+                                  firstInput = result.toString();
+                                  initial = firstInput;
+                                  print(initial);
+                                  initialHasValue = true;
+                                }
+                              });
+                              //initial = '0';
+                            },
                           ),
                         ],
                       ),
@@ -104,6 +128,9 @@ class _CalCState extends State<CalC> {
                                 if (initial == '0') {
                                   initial = '7';
                                 } else {
+                                  if (initial == firstInput) {
+                                    initial = '';
+                                  }
                                   initial = initial + '7';
                                 }
                               });
@@ -117,6 +144,9 @@ class _CalCState extends State<CalC> {
                                 if (initial == '0') {
                                   initial = '8';
                                 } else {
+                                  if (initial == firstInput) {
+                                    initial = '';
+                                  }
                                   initial = initial + '8';
                                 }
                               });
@@ -130,6 +160,9 @@ class _CalCState extends State<CalC> {
                                 if (initial == '0') {
                                   initial = '9';
                                 } else {
+                                  if (initial == firstInput) {
+                                    initial = '';
+                                  }
                                   initial = initial + '9';
                                 }
                               });
@@ -138,6 +171,22 @@ class _CalCState extends State<CalC> {
                           CalCButton(
                             text: 'x',
                             color: Color(0xFFF27E3F),
+                            onTap: () {
+                              setState(() {
+                                if (firstInput == '0') {
+                                  firstInput = initial;
+                                  initial = '0';
+                                } else {
+                                  nextInput = initial;
+                                  double result = mul(firstInput, nextInput);
+                                  firstInput = result.toString();
+                                  initial = firstInput;
+                                  print(initial);
+                                  initialHasValue = true;
+                                }
+                              });
+                              //initial = '0';
+                            },
                           ),
                         ],
                       ),
@@ -152,6 +201,9 @@ class _CalCState extends State<CalC> {
                                 if (initial == '0') {
                                   initial = '4';
                                 } else {
+                                  if (initial == firstInput) {
+                                    initial = '';
+                                  }
                                   initial = initial + '4';
                                 }
                               });
@@ -165,6 +217,9 @@ class _CalCState extends State<CalC> {
                                 if (initial == '0') {
                                   initial = '5';
                                 } else {
+                                  if (initial == firstInput) {
+                                    initial = '';
+                                  }
                                   initial = initial + '5';
                                 }
                               });
@@ -178,6 +233,9 @@ class _CalCState extends State<CalC> {
                                 if (initial == '0') {
                                   initial = '6';
                                 } else {
+                                  if (initial == firstInput) {
+                                    initial = '';
+                                  }
                                   initial = initial + '6';
                                 }
                               });
@@ -186,6 +244,22 @@ class _CalCState extends State<CalC> {
                           CalCButton(
                             text: '-',
                             color: Color(0xFFF27E3F),
+                            onTap: () {
+                              setState(() {
+                                if (firstInput == '0') {
+                                  firstInput = initial;
+                                  initial = '0';
+                                } else {
+                                  nextInput = initial;
+                                  double result = sub(firstInput, nextInput);
+                                  firstInput = result.toString();
+                                  initial = firstInput;
+                                  print(initial);
+                                  initialHasValue = true;
+                                }
+                              });
+                              //initial = '0';
+                            },
                           ),
                         ],
                       ),
@@ -200,6 +274,9 @@ class _CalCState extends State<CalC> {
                                 if (initial == '0') {
                                   initial = '1';
                                 } else {
+                                  if (initial == firstInput) {
+                                    initial = '';
+                                  }
                                   initial = initial + '1';
                                 }
                               });
@@ -213,6 +290,9 @@ class _CalCState extends State<CalC> {
                                 if (initial == '0') {
                                   initial = '2';
                                 } else {
+                                  if (initial == firstInput) {
+                                    initial = '';
+                                  }
                                   initial = initial + '2';
                                 }
                               });
@@ -226,6 +306,9 @@ class _CalCState extends State<CalC> {
                                 if (initial == '0') {
                                   initial = '3';
                                 } else {
+                                  if (initial == firstInput) {
+                                    initial = '';
+                                  }
                                   initial = initial + '3';
                                 }
                               });
@@ -236,23 +319,19 @@ class _CalCState extends State<CalC> {
                             color: Color(0xFFF27E3F),
                             onTap: () {
                               setState(() {
-                                //add()
-                                //var x = double.parse(initial);
                                 if (firstInput == '0') {
                                   firstInput = initial;
                                   initial = '0';
                                 } else {
                                   nextInput = initial;
-
                                   double result = add(firstInput, nextInput);
                                   firstInput = result.toString();
                                   initial = firstInput;
                                   print(initial);
+                                  initialHasValue = true;
                                 }
-
-                                ansHasValue = true;
                               });
-                              initial = '0';
+                              //initial = '0';
                             },
                           ),
                         ],
@@ -268,6 +347,9 @@ class _CalCState extends State<CalC> {
                                 if (initial == '0') {
                                   initial = '0';
                                 } else {
+                                  if (initial == firstInput) {
+                                    initial = '';
+                                  }
                                   initial = initial + '0';
                                 }
                               });
@@ -281,6 +363,9 @@ class _CalCState extends State<CalC> {
                                 if (initial == '0') {
                                   initial = '.';
                                 } else {
+                                  if (initial == firstInput) {
+                                    initial = '';
+                                  }
                                   initial = initial + '.';
                                 }
                               });
