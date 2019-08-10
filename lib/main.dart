@@ -14,21 +14,22 @@ class _CalCState extends State<CalC> {
   String nextInput;
   String answer = '0';
   bool initialHasValue = false;
+  String operand = '';
 
   double add(String x, String y) {
-    return double.parse(y) + double.parse(x);
+    return double.parse(x) + double.parse(y);
   }
 
   double sub(String x, String y) {
-    return double.parse(y) - double.parse(x);
+    return double.parse(x) - double.parse(y);
   }
 
   double mul(String x, String y) {
-    return double.parse(y) * double.parse(x);
+    return double.parse(x) * double.parse(y);
   }
 
   double div(String x, String y) {
-    return double.parse(y) / double.parse(x);
+    return double.parse(x) / double.parse(y);
   }
 
   @override
@@ -84,6 +85,7 @@ class _CalCState extends State<CalC> {
                                 firstInput = '0';
                                 answer = '0';
                                 initialHasValue = false;
+                                operand = '';
                               });
                             },
                           ),
@@ -100,16 +102,62 @@ class _CalCState extends State<CalC> {
                             color: Color(0xFFF27E3F),
                             onTap: () {
                               setState(() {
-                                if (firstInput == '0') {
-                                  firstInput = initial;
-                                  initial = '0';
-                                } else {
+                                if (operand == '' || operand == '/') {
+                                  if (firstInput == '0') {
+                                    firstInput = initial;
+                                    initial = '0';
+                                    operand = '/';
+                                  } else {
+                                    nextInput = initial;
+                                    double result = div(firstInput, nextInput);
+                                    int floor = result.floor();
+                                    print(floor);
+                                    if (floor == result) {
+                                      firstInput = floor.toString();
+                                    } else {
+                                      firstInput = result.toString();
+                                    }
+                                    initial = firstInput;
+                                    print(initial);
+                                    operand = '/';
+                                    initialHasValue = true;
+                                  }
+                                } else if (operand == '+') {
                                   nextInput = initial;
-                                  double result = div(firstInput, nextInput);
-                                  firstInput = result.toString();
+                                  double result = add(firstInput, nextInput);
+                                  int floor = result.floor();
+                                  print(floor);
+                                  if (floor == result) {
+                                    firstInput = floor.toString();
+                                  } else {
+                                    firstInput = result.toString();
+                                  }
                                   initial = firstInput;
-                                  print(initial);
-                                  initialHasValue = true;
+                                  operand = '/';
+                                } else if (operand == '-') {
+                                  nextInput = initial;
+                                  double result = sub(firstInput, nextInput);
+                                  int floor = result.floor();
+                                  print(floor);
+                                  if (floor == result) {
+                                    firstInput = floor.toString();
+                                  } else {
+                                    firstInput = result.toString();
+                                  }
+                                  initial = firstInput;
+                                  operand = '/';
+                                } else if (operand == 'x') {
+                                  nextInput = initial;
+                                  double result = mul(firstInput, nextInput);
+                                  int floor = result.floor();
+                                  print(floor);
+                                  if (floor == result) {
+                                    firstInput = floor.toString();
+                                  } else {
+                                    firstInput = result.toString();
+                                  }
+                                  initial = firstInput;
+                                  operand = '/';
                                 }
                               });
                               //initial = '0';
@@ -173,16 +221,62 @@ class _CalCState extends State<CalC> {
                             color: Color(0xFFF27E3F),
                             onTap: () {
                               setState(() {
-                                if (firstInput == '0') {
-                                  firstInput = initial;
-                                  initial = '0';
-                                } else {
+                                if (operand == '' || operand == 'x') {
+                                  if (firstInput == '0') {
+                                    firstInput = initial;
+                                    initial = '0';
+                                    operand = 'x';
+                                  } else {
+                                    nextInput = initial;
+                                    double result = mul(firstInput, nextInput);
+                                    int floor = result.floor();
+                                    print(floor);
+                                    if (floor == result) {
+                                      firstInput = floor.toString();
+                                    } else {
+                                      firstInput = result.toString();
+                                    }
+                                    initial = firstInput;
+                                    print(initial);
+                                    operand = 'x';
+                                    initialHasValue = true;
+                                  }
+                                } else if (operand == '+') {
                                   nextInput = initial;
-                                  double result = mul(firstInput, nextInput);
-                                  firstInput = result.toString();
+                                  double result = add(firstInput, nextInput);
+                                  int floor = result.floor();
+                                  print(floor);
+                                  if (floor == result) {
+                                    firstInput = floor.toString();
+                                  } else {
+                                    firstInput = result.toString();
+                                  }
                                   initial = firstInput;
-                                  print(initial);
-                                  initialHasValue = true;
+                                  operand = 'x';
+                                } else if (operand == '-') {
+                                  nextInput = initial;
+                                  double result = sub(firstInput, nextInput);
+                                  int floor = result.floor();
+                                  print(floor);
+                                  if (floor == result) {
+                                    firstInput = floor.toString();
+                                  } else {
+                                    firstInput = result.toString();
+                                  }
+                                  initial = firstInput;
+                                  operand = 'x';
+                                } else if (operand == '/') {
+                                  nextInput = initial;
+                                  double result = div(firstInput, nextInput);
+                                  int floor = result.floor();
+                                  print(floor);
+                                  if (floor == result) {
+                                    firstInput = floor.toString();
+                                  } else {
+                                    firstInput = result.toString();
+                                  }
+                                  initial = firstInput;
+                                  operand = 'x';
                                 }
                               });
                               //initial = '0';
@@ -246,16 +340,65 @@ class _CalCState extends State<CalC> {
                             color: Color(0xFFF27E3F),
                             onTap: () {
                               setState(() {
-                                if (firstInput == '0') {
-                                  firstInput = initial;
-                                  initial = '0';
-                                } else {
+                                if (operand == '' || operand == '-') {
+                                  if (firstInput == '0') {
+                                    firstInput = initial;
+                                    initial = '0';
+                                    operand = '-';
+                                  } else {
+                                    nextInput = initial;
+                                    double result = sub(firstInput, nextInput);
+                                    int floor = result.floor();
+                                    print(floor);
+                                    if (floor == result) {
+                                      firstInput = floor.toString();
+                                    } else {
+                                      firstInput = result.toString();
+                                    }
+                                    initial = firstInput;
+                                    print('Initial : $initial');
+                                    print('firstInput : $firstInput');
+                                    initialHasValue = true;
+                                    operand = '-';
+                                  }
+                                } else if (operand == '+') {
                                   nextInput = initial;
-                                  double result = sub(firstInput, nextInput);
-                                  firstInput = result.toString();
+                                  double result = add(firstInput, nextInput);
+                                  int floor = result.floor();
+                                  print(floor);
+                                  if (floor == result) {
+                                    firstInput = floor.toString();
+                                  } else {
+                                    firstInput = result.toString();
+                                  }
                                   initial = firstInput;
-                                  print(initial);
-                                  initialHasValue = true;
+                                  print('Initial : $initial');
+                                  print('firstInput : $firstInput');
+                                  operand = '-';
+                                } else if (operand == 'x') {
+                                  nextInput = initial;
+                                  double result = mul(firstInput, nextInput);
+                                  int floor = result.floor();
+                                  print(floor);
+                                  if (floor == result) {
+                                    firstInput = floor.toString();
+                                  } else {
+                                    firstInput = result.toString();
+                                  }
+                                  initial = firstInput;
+                                  operand = '-';
+                                } else if (operand == '/') {
+                                  nextInput = initial;
+                                  double result = div(firstInput, nextInput);
+                                  int floor = result.floor();
+                                  print(floor);
+                                  if (floor == result) {
+                                    firstInput = floor.toString();
+                                  } else {
+                                    firstInput = result.toString();
+                                  }
+                                  initial = firstInput;
+                                  operand = '-';
                                 }
                               });
                               //initial = '0';
@@ -319,16 +462,64 @@ class _CalCState extends State<CalC> {
                             color: Color(0xFFF27E3F),
                             onTap: () {
                               setState(() {
-                                if (firstInput == '0') {
-                                  firstInput = initial;
-                                  initial = '0';
-                                } else {
+                                if (operand == '' || operand == '+') {
+                                  if (firstInput == '0') {
+                                    firstInput = initial;
+                                    initial = '0';
+                                    operand = '+';
+                                  } else {
+                                    nextInput = initial;
+                                    double result = add(firstInput, nextInput);
+                                    int floor = result.floor();
+                                    print(floor);
+                                    if (floor == result) {
+                                      firstInput = floor.toString();
+                                    } else {
+                                      firstInput = result.toString();
+                                    }
+                                    initial = firstInput;
+                                    print('Initial : $initial');
+                                    print('firstInput : $firstInput');
+                                    initialHasValue = true;
+                                    operand = '+';
+                                    print(operand);
+                                  }
+                                } else if (operand == '-') {
                                   nextInput = initial;
-                                  double result = add(firstInput, nextInput);
-                                  firstInput = result.toString();
+                                  double result = sub(firstInput, nextInput);
+                                  int floor = result.floor();
+                                  print(floor);
+                                  if (floor == result) {
+                                    firstInput = floor.toString();
+                                  } else {
+                                    firstInput = result.toString();
+                                  }
                                   initial = firstInput;
-                                  print(initial);
-                                  initialHasValue = true;
+                                  operand = '+';
+                                } else if (operand == 'x') {
+                                  nextInput = initial;
+                                  double result = mul(firstInput, nextInput);
+                                  int floor = result.floor();
+                                  print(floor);
+                                  if (floor == result) {
+                                    firstInput = floor.toString();
+                                  } else {
+                                    firstInput = result.toString();
+                                  }
+                                  initial = firstInput;
+                                  operand = '+';
+                                } else if (operand == '/') {
+                                  nextInput = initial;
+                                  double result = div(firstInput, nextInput);
+                                  int floor = result.floor();
+                                  print(floor);
+                                  if (floor == result) {
+                                    firstInput = floor.toString();
+                                  } else {
+                                    firstInput = result.toString();
+                                  }
+                                  initial = firstInput;
+                                  operand = '+';
                                 }
                               });
                               //initial = '0';
@@ -389,7 +580,57 @@ class _CalCState extends State<CalC> {
                                   TextStyle(fontSize: 40, color: Colors.white),
                             ),
                             onPressed: () {
-                              setState(() {});
+                              setState(() {
+                                if (operand == '+') {
+                                  nextInput = initial;
+                                  double result = add(firstInput, nextInput);
+                                  int floor = result.floor();
+                                  print(floor);
+                                  if (floor == result) {
+                                    firstInput = floor.toString();
+                                  } else {
+                                    firstInput = result.toString();
+                                  }
+                                  initial = firstInput;
+                                  operand = '';
+                                } else if (operand == '-') {
+                                  nextInput = initial;
+                                  double result = sub(firstInput, nextInput);
+                                  int floor = result.floor();
+                                  print(floor);
+                                  if (floor == result) {
+                                    firstInput = floor.toString();
+                                  } else {
+                                    firstInput = result.toString();
+                                  }
+                                  initial = firstInput;
+                                  operand = '';
+                                } else if (operand == 'x') {
+                                  nextInput = initial;
+                                  double result = mul(firstInput, nextInput);
+                                  int floor = result.floor();
+                                  print(floor);
+                                  if (floor == result) {
+                                    firstInput = floor.toString();
+                                  } else {
+                                    firstInput = result.toString();
+                                  }
+                                  initial = firstInput;
+                                  operand = '';
+                                } else if (operand == '/') {
+                                  nextInput = initial;
+                                  double result = div(firstInput, nextInput);
+                                  int floor = result.floor();
+                                  print(floor);
+                                  if (floor == result) {
+                                    firstInput = floor.toString();
+                                  } else {
+                                    firstInput = result.toString();
+                                  }
+                                  initial = firstInput;
+                                  operand = '';
+                                }
+                              });
                             },
                           ),
                         ],
