@@ -76,7 +76,7 @@ class _CalCsState extends State<CalCs> {
             },
           ),
         ],
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xFFFAFAFA),
         elevation: 0,
       ),
       body: SafeArea(
