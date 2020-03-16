@@ -1,6 +1,6 @@
 # Cal C
 
-Cal C a new Flutter Calculator application.
+Cal C a Flutter Calculator application.
 
 ## Getting Started
 
