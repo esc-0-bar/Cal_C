@@ -7,7 +7,10 @@ void main() => runApp(CalC());
 class CalC extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(theme: ThemeData(fontFamily: 'Blinker'), home: CalCs());
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(fontFamily: 'Blinker'),
+        home: CalCs());
   }
 }
 
